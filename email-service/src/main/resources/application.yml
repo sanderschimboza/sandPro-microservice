@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: email-service
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:4001/eureka
+
+server:
+  port: 4040

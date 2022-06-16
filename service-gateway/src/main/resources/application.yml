@@ -1,0 +1,31 @@
+server:
+  port: 4000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:4001/eureka
+
+spring:
+  application:
+    name: service-gateway
+
+  cloud:
+    gateway:
+      routes:
+        - id: RegistrationModule
+          uri: lb://registration-service
+          predicates:
+            - Path=/api/v1/register/**
+        - id: EmailModule
+          uri: lb://email-service
+          predicates:
+            - Path=/api/v1/email/**
+        - id: UserInterfaceModule
+          uri: lb://user-interface
+          predicates:
+            - Path=/sandPro/**
+          filters:
+            - name: RequestSize
+              args:
+                Maxsize: 5000000
